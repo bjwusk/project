@@ -15,7 +15,8 @@ const PRODUCTS = [
     benefits: "高蛋白低脂肪，适合日常奖励",
     ingredients: "100% 鸡胸肉",
     suitable: "犬 / 猫通用",
-    image: "assets/product-chicken.svg"
+    image: "assets/product-chicken.svg",
+    sales: 1860
   },
   {
     id: 2,
@@ -28,7 +29,8 @@ const PRODUCTS = [
     benefits: "美毛护肤，富含不饱和脂肪酸",
     ingredients: "100% 三文鱼",
     suitable: "犬 / 猫通用",
-    image: "assets/product-freezedry.svg"
+    image: "assets/product-freezedry.svg",
+    sales: 1520
   },
   {
     id: 3,
@@ -41,7 +43,8 @@ const PRODUCTS = [
     benefits: "洁齿护龈，缓解换牙不适",
     ingredients: "红薯淀粉、鸡肉粉、薄荷提取物",
     suitable: "犬用（3月龄以上）",
-    image: "assets/product-dental.svg"
+    image: "assets/product-dental.svg",
+    sales: 2100
   },
   {
     id: 4,
@@ -54,7 +57,8 @@ const PRODUCTS = [
     benefits: "低脂低卡，训练好伴侣",
     ingredients: "鸡胸肉、南瓜、蓝莓",
     suitable: "犬 / 猫通用",
-    image: "assets/product-training.svg"
+    image: "assets/product-training.svg",
+    sales: 2380
   },
   {
     id: 5,
@@ -67,7 +71,8 @@ const PRODUCTS = [
     benefits: "鸭肉性凉，适合易上火宠物",
     ingredients: "鸭胸肉、红薯、迷迭香",
     suitable: "犬用",
-    image: "assets/product-duck.svg"
+    image: "assets/product-duck.svg",
+    sales: 1740
   },
   {
     id: 6,
@@ -80,7 +85,8 @@ const PRODUCTS = [
     benefits: "补铁补血，强壮体格",
     ingredients: "100% 牛肉",
     suitable: "犬用",
-    image: "assets/product-beef.svg"
+    image: "assets/product-beef.svg",
+    sales: 980
   },
   {
     id: 7,
@@ -93,7 +99,8 @@ const PRODUCTS = [
     benefits: "高钙耐啃，释放咀嚼天性",
     ingredients: "100% 牛肋骨",
     suitable: "犬用（中型犬以上）",
-    image: "assets/product-rib.svg"
+    image: "assets/product-rib.svg",
+    sales: 1250
   },
   {
     id: 8,
@@ -106,7 +113,8 @@ const PRODUCTS = [
     benefits: "补肝明目，挑食克星",
     ingredients: "100% 鸡肝",
     suitable: "犬 / 猫通用",
-    image: "assets/product-chicken.svg"
+    image: "assets/product-chicken.svg",
+    sales: 2030
   }
 ];
 
@@ -115,6 +123,7 @@ let cart = [];
 
 /* ---------- DOM 引用 ---------- */
 const productGrid = document.getElementById("productGrid");
+const hotSellersGrid = document.getElementById("hotSellersGrid");
 const filterBar = document.getElementById("filterBar");
 const cartToggle = document.getElementById("cartToggle");
 const cartSidebar = document.getElementById("cartSidebar");
@@ -131,6 +140,39 @@ const modalClose = document.getElementById("modalClose");
 const modalBody = document.getElementById("modalBody");
 const successModal = document.getElementById("successModal");
 const successClose = document.getElementById("successClose");
+
+/* ---------- 渲染热销榜 ---------- */
+function renderHotSellers() {
+  const sorted = [...PRODUCTS].sort((a, b) => b.sales - a.sales).slice(0, 4);
+  hotSellersGrid.innerHTML = sorted.map((p, i) => {
+    const rank = i + 1;
+    const rankClass = rank <= 3 ? `rank-${rank}` : "rank-4";
+    const rankBadge = rank <= 3 ? `rank-badge rank-${rank}` : "rank-badge rank-4";
+    return `
+      <div class="hot-card" data-id="${p.id}">
+        <div class="${rankBadge}">#${rank}</div>
+        <img src="${p.image}" alt="${p.name}" class="hot-card-img" loading="lazy">
+        <div class="hot-card-body">
+          <div class="hot-card-category">${p.categoryLabel}</div>
+          <h3 class="hot-card-title">${p.name}</h3>
+          <div class="hot-card-bottom">
+            <span class="hot-card-price">¥${p.price.toFixed(1)}</span>
+            <span class="hot-card-sales">🔥 ${(p.sales / 10).toFixed(0)} 人已购</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // 点击热销卡片打开详情
+  document.querySelectorAll(".hot-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const id = parseInt(card.dataset.id);
+      const product = PRODUCTS.find(p => p.id === id);
+      if (product) openModal(product);
+    });
+  });
+}
 
 /* ---------- 渲染商品 ---------- */
 function renderProducts(filter = "all") {
@@ -364,5 +406,6 @@ successModal.addEventListener("click", (e) => {
 });
 
 /* ---------- 初始化 ---------- */
+renderHotSellers();
 renderProducts();
 updateCartUI();

@@ -196,6 +196,89 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   letter-spacing: -0.01em;
 }
 
+/* --- Hot Sellers --- */
+.hot-sellers {
+  padding: 80px 0 40px;
+  background: linear-gradient(180deg, #faf8f5 0%, #f5f1ec 100%);
+}
+.hot-sellers-header { text-align: center; margin-bottom: 36px; }
+.hot-sellers-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.hot-sellers-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+.hot-sellers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.hot-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.hot-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.rank-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.rank-1 { background: linear-gradient(135deg, #e8a838, #d4922a); }
+.rank-2 { background: linear-gradient(135deg, #b0b0b0, #909090); }
+.rank-3 { background: linear-gradient(135deg, #c89060, #b07848); }
+.rank-4 { background: var(--color-accent); }
+.hot-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--color-warm);
+}
+.hot-card-body { padding: 14px 16px 18px; }
+.hot-card-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 3px;
+  letter-spacing: 0.04em;
+}
+.hot-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hot-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hot-card-price {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-berry);
+}
+.hot-card-sales {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
 /* --- Products --- */
 .products { padding: 100px 0 80px; }
 
@@ -525,7 +608,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .footer-note { font-size: 0.75rem; opacity: 0.6; }
 
 /* --- Responsive --- */
+/* --- Hot Sellers Responsive --- */
 @media (max-width: 768px) {
+  .hot-sellers-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .hot-sellers { padding: 56px 0 28px; }
+  .hot-sellers-title { font-size: 1.3rem; }
   .hero { padding: 100px 0 60px; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-text { max-width: 100%; text-align: center; }
@@ -543,6 +630,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 @media (max-width: 480px) {
+  .hot-sellers-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .hot-card-body { padding: 10px 12px 14px; }
+  .hot-card-title { font-size: 0.85rem; }
   .hero-text h1 { font-size: 1.8rem; }
   .features-grid { grid-template-columns: 1fr; }
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -550,3 +640,5 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .product-card-title { font-size: 0.85rem; }
   .modal-detail-body { padding: 18px 20px 22px; }
 }
+
+

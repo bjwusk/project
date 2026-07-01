@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#f0faf0"/>
+      <stop offset="100%" style="stop-color:#e8f5e8"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <rect x="120" y="180" width="160" height="70" rx="20" fill="#7ab87a"/>
+  <rect x="130" y="190" width="140" height="15" rx="6" fill="#6aaa6a"/>
+  <rect x="130" y="215" width="140" height="15" rx="6" fill="#6aaa6a"/>
+  <circle cx="160" cy="220" r="5" fill="#5a9a5a" opacity="0.4"/>
+  <circle cx="230" cy="200" r="5" fill="#5a9a5a" opacity="0.4"/>
+  <text x="200" y="300" text-anchor="middle" font-family="serif" font-size="14" fill="#666">洁齿磨牙棒</text>
+</svg>

@@ -1,0 +1,17 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#fef0f0"/>
+      <stop offset="100%" style="stop-color:#f5e8e8"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="210" r="55" fill="#d49494"/>
+  <circle cx="200" cy="210" r="45" fill="#c48484"/>
+  <circle cx="185" cy="200" r="15" fill="#b47474" opacity="0.4"/>
+  <circle cx="215" cy="220" r="12" fill="#b47474" opacity="0.4"/>
+  <circle cx="195" cy="225" r="10" fill="#b47474" opacity="0.3"/>
+  <circle cx="200" cy="180" r="4" fill="#a46464" opacity="0.4"/>
+  <circle cx="175" cy="220" r="3" fill="#a46464" opacity="0.4"/>
+  <text x="200" y="300" text-anchor="middle" font-family="serif" font-size="14" fill="#666">训练奖励粒</text>
+</svg>

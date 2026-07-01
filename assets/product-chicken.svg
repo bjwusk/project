@@ -1,0 +1,20 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#fef9f0"/>
+      <stop offset="100%" style="stop-color:#f5ebe0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="220" rx="100" ry="60" fill="#d4a574" opacity="0.9"/>
+  <ellipse cx="200" cy="210" rx="85" ry="48" fill="#c4956a"/>
+  <line x1="130" y1="200" x2="160" y2="180" stroke="#b8845a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="145" y1="210" x2="170" y2="190" stroke="#b8845a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="230" y1="180" x2="270" y2="200" stroke="#b8845a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="235" y1="190" x2="260" y2="210" stroke="#b8845a" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="180" cy="235" rx="30" ry="8" fill="#8b6914" opacity="0.3"/>
+  <ellipse cx="220" cy="240" rx="25" ry="6" fill="#8b6914" opacity="0.3"/>
+  <circle cx="175" cy="180" r="4" fill="#7a5c3a" opacity="0.5"/>
+  <circle cx="210" cy="195" r="3" fill="#7a5c3a" opacity="0.5"/>
+  <text x="200" y="300" text-anchor="middle" font-family="serif" font-size="14" fill="#666">鸡胸肉干</text>
+</svg>

@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#fef5ee"/>
+      <stop offset="100%" style="stop-color:#f5e8dd"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="200" rx="80" ry="50" fill="#d4a882"/>
+  <ellipse cx="200" cy="195" rx="70" ry="40" fill="#c99872"/>
+  <path d="M140 190 Q160 170 200 175 Q240 170 260 190" fill="none" stroke="#b88462" stroke-width="2"/>
+  <path d="M145 200 Q170 185 200 188 Q230 185 255 200" fill="none" stroke="#b88462" stroke-width="2"/>
+  <circle cx="180" cy="180" r="3" fill="#a87858" opacity="0.5"/>
+  <circle cx="220" cy="185" r="3" fill="#a87858" opacity="0.5"/>
+  <text x="200" y="300" text-anchor="middle" font-family="serif" font-size="14" fill="#666">鸭肉绕薯条</text>
+</svg>

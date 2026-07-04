@@ -1,9 +1,9 @@
-﻿/* ============================================
+/* ============================================
    茸茸食事所 · 交互逻辑
    ============================================ */
 
 /* ---------- 商品数据 ---------- */
-const PRODUCTS = [
+const DEFAULT_PRODUCTS = [
   { id: 1, name: "鸡胸肉干", category: "chicken", categoryLabel: "🐔 鸡肉", price: 39.9, spec: "100g / 包", desc: "精选去脂鸡胸肉，低温慢烘12小时，保留原生肉香", benefits: "高蛋白低脂肪，适合日常奖励", ingredients: "100% 鸡胸肉", suitable: "犬 / 猫通用", image: "assets/product-chicken.svg", sales: 1860 },
   { id: 2, name: "冻干三文鱼", category: "freezedry", categoryLabel: "❄️ 冻干", price: 59.9, spec: "50g / 罐", desc: "挪威三文鱼急速冻干，-35°C 锁住Omega-3", benefits: "美毛护肤，富含不饱和脂肪酸", ingredients: "100% 三文鱼", suitable: "犬 / 猫通用", image: "assets/product-freezedry.svg", sales: 1520 },
   { id: 3, name: "洁齿磨牙棒", category: "dental", categoryLabel: "🦷 洁齿", price: 45.0, spec: "12根 / 盒", desc: "螺旋纹设计帮助摩擦牙垢，添加薄荷清新口气", benefits: "洁齿护龈，缓解换牙不适", ingredients: "红薯淀粉、鸡肉粉、薄荷提取物", suitable: "犬用（3月龄以上）", image: "assets/product-dental.svg", sales: 2100 },
@@ -13,6 +13,13 @@ const PRODUCTS = [
   { id: 7, name: "风干牛肋骨", category: "beef", categoryLabel: "🥩 牛肉", price: 55.0, spec: "3根 / 包", desc: "整根牛肋骨低温风干，耐啃磨牙天然洁齿", benefits: "高钙耐啃，释放咀嚼天性", ingredients: "100% 牛肋骨", suitable: "犬用（中型犬以上）", image: "assets/product-rib.svg", sales: 1250 },
   { id: 8, name: "冻干鸡肝", category: "freezedry", categoryLabel: "❄️ 冻干", price: 35.0, spec: "40g / 罐", desc: "新鲜鸡肝冻干处理，天然维生素A来源", benefits: "补肝明目，挑食克星", ingredients: "100% 鸡肝", suitable: "犬 / 猫通用", image: "assets/product-chicken.svg", sales: 2030 }
 ];
+
+function getCustomProducts() {
+  try { return JSON.parse(localStorage.getItem("lanhe-products") || "[]"); }
+  catch { return []; }
+}
+
+const PRODUCTS = [...DEFAULT_PRODUCTS, ...getCustomProducts()];
 
 /* ---------- 用户状态 ---------- */
 // userState: null (未进入), "guest" (游客), "logged" (已登录)
@@ -599,7 +606,26 @@ checkoutBtn.addEventListener("click", () => {
 
   // Find default address
   const defaultAddr = userAddresses.find(a => a.isDefault) || userAddresses[0];
-  successAddress.textContent = `📍 送至：${defaultAddr.name} ${defaultAddr.phone} · ${defaultAddr.detail}`;
+
+  // Save order to localStorage
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const orderId = "ORD-" + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + "-" + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+  const order = {
+    id: orderId,
+    createdAt: now.getFullYear() + "-" + pad(now.getMonth()+1) + "-" + pad(now.getDate()) + " " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()),
+    customer: currentUser || "游客",
+    address: defaultAddr ? (defaultAddr.name + " " + defaultAddr.phone + " " + defaultAddr.detail) : "未填写地址",
+    items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+    total: cart.reduce((sum, i) => sum + i.price * i.qty, 0),
+    status: "待配送"
+  };
+
+  const existingOrders = JSON.parse(localStorage.getItem("lanhe-orders") || "[]");
+  existingOrders.unshift(order);
+  localStorage.setItem("lanhe-orders", JSON.stringify(existingOrders));
+
+  successAddress.textContent = `📍 送至：${defaultAddr ? (defaultAddr.name + " " + defaultAddr.phone + " · " + defaultAddr.detail) : "未填写地址"}`;
 
   successModal.classList.add("open");
   document.body.style.overflow = "hidden";
@@ -611,7 +637,6 @@ successClose.addEventListener("click", () => {
   successModal.classList.remove("open");
   document.body.style.overflow = "";
 });
-
 successModal.addEventListener("click", (e) => {
   if (e.target === successModal) {
     successModal.classList.remove("open");
@@ -625,3 +650,6 @@ function mainInit() {
   renderProducts();
   updateCartUI();
 }
+
+
+

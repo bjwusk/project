@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>茸茸食事所 · 管理后台</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <!-- 顶部导航 -->
+  <header class="admin-header">
+    <div class="admin-header-inner container">
+      <a href="index.html" class="admin-logo">🐾 茸茸食事所 · 管理后台</a>
+      <nav class="admin-nav">
+        <a href="#stats" class="admin-nav-link active">概览</a>
+        <a href="#orders" class="admin-nav-link">订单管理</a>
+        <a href="#products" class="admin-nav-link">商品管理</a>
+        <a href="index.html" class="admin-nav-link admin-back-link">← 返回商城</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main container">
+    <!-- 概览统计 -->
+    <section id="stats" class="admin-section">
+      <h2 class="admin-section-title">📊 营业概览</h2>
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-label">总营业额</div>
+          <div class="stat-value" id="statRevenue">¥0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">总订单数</div>
+          <div class="stat-value" id="statOrders">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">售出件数</div>
+          <div class="stat-value" id="statItems">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">商品种类</div>
+          <div class="stat-value" id="statProducts">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 销量排行 -->
+    <section class="admin-section">
+      <h2 class="admin-section-title">🏆 商品销量排行</h2>
+      <div class="rankings-grid" id="rankingsGrid"></div>
+    </section>
+
+    <!-- 商品销售明细 -->
+    <section class="admin-section">
+      <h2 class="admin-section-title">📋 商品销售明细</h2>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="salesTable">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>商品名称</th>
+              <th>分类</th>
+              <th>单价</th>
+              <th>销量</th>
+              <th>销售额</th>
+            </tr>
+          </thead>
+          <tbody id="salesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 订单管理 -->
+    <section id="orders" class="admin-section">
+      <h2 class="admin-section-title">📦 订单管理</h2>
+      <div class="order-filters">
+        <button class="filter-btn active" data-filter="all">全部订单</button>
+        <button class="filter-btn" data-filter="real">真实订单</button>
+        <button class="filter-btn" data-filter="demo">演示订单</button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>订单号</th>
+              <th>下单时间</th>
+              <th>客户</th>
+              <th>商品</th>
+              <th>总价</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 商品管理（上架新品） -->
+    <section id="products" class="admin-section">
+      <h2 class="admin-section-title">➕ 上架新品</h2>
+      <form class="product-form" id="productForm">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>商品名称</label>
+            <input type="text" id="formName" placeholder="如：鸡胸肉干" required>
+          </div>
+          <div class="form-field">
+            <label>分类</label>
+            <select id="formCategory">
+              <option value="chicken">🐔 鸡肉</option>
+              <option value="freezedry">❄️ 冻干</option>
+              <option value="dental">🦷 洁齿</option>
+              <option value="training">🎯 训练奖励</option>
+              <option value="beef">🥩 牛肉</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>价格（¥）</label>
+            <input type="number" id="formPrice" step="0.1" placeholder="39.9" required>
+          </div>
+          <div class="form-field">
+            <label>规格</label>
+            <input type="text" id="formSpec" placeholder="如：100g / 包">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>描述</label>
+          <textarea id="formDesc" rows="2" placeholder="商品简短描述"></textarea>
+        </div>
+        <div class="form-field">
+          <label>卖点</label>
+          <input type="text" id="formBenefits" placeholder="如：高蛋白低脂肪，适合日常奖励">
+        </div>
+        <div class="form-field">
+          <label>成分</label>
+          <input type="text" id="formIngredients" placeholder="如：100% 鸡胸肉">
+        </div>
+        <div class="form-field">
+          <label>适用宠物</label>
+          <input type="text" id="formSuitable" placeholder="如：犬 / 猫通用">
+        </div>
+        <div class="form-field">
+          <label>商品图片</label>
+          <select id="formImage">
+            <option value="assets/product-chicken.svg">鸡肉</option>
+            <option value="assets/product-freezedry.svg">冻干三文鱼</option>
+            <option value="assets/product-dental.svg">洁齿</option>
+            <option value="assets/product-training.svg">训练奖励</option>
+            <option value="assets/product-beef.svg">牛肉</option>
+            <option value="assets/product-duck.svg">鸭肉</option>
+            <option value="assets/product-rib.svg">牛肋骨</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">上架商品</button>
+      </form>
+      <div class="admin-sub-section">
+        <h3 class="admin-sub-title">已上架的自定义商品</h3>
+        <div id="customProductsList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="admin-footer">
+    <div class="container">
+      <p>🐾 茸茸食事所 · 管理后台（演示版）</p>
+    </div>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>
